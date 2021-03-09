@@ -1,14 +1,9 @@
 
 import numpy as np
-
 import os
-
 import cv2
-
 from tqdm import tqdm
-
 import tensorflow as tf
-
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
@@ -25,23 +20,23 @@ training_data = []
 
 
 def create_training_data():
-    for category in CATEGORIES:  # do dogs and cats
+    for category in CATEGORIES:  
 
-        path = os.path.join(DATADIR, category)  # create path to dogs and cats
-        # get the classification  (0 or a 1). 0=dog 1=cat
+        path = os.path.join(DATADIR, category)  
+        
         class_num = CATEGORIES.index(category)
 
         for img in tqdm(os.listdir(path)):
 
-            # iterate over each image per dogs and cats
+            
             try:
                 img_array = cv2.imread(os.path.join(
-                    path, img), cv2.IMREAD_GRAYSCALE)  # convert to array
-                # resize to normalize data size
+                    path, img), cv2.IMREAD_GRAYSCALE) 
+               
                 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
-                # add this to our training_data
+                
                 training_data.append([new_array, class_num])
-            except Exception as e:  # in the interest in keeping the output clean...
+            except Exception as e:  
                 pass
 
 
@@ -79,7 +74,7 @@ for dense_layer in dense_layers:
                 model.add(Activation('relu'))
                 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-            # this converts our 3D feature maps to 1D feature vectors
+           
             model.add(Flatten())
 
             for l in range(dense_layer):
@@ -98,4 +93,4 @@ for dense_layer in dense_layers:
 
             model.fit(X, y, batch_size=5, epochs=1, callbacks=[tensorboard],validation_split =0.3)
 
-#model.save("cats_vs_dogs_models")
+model.save("cats_vs_dogs_models")
