@@ -10,8 +10,8 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.callbacks import TensorBoard
 
 
-DATADIR = "E:/PetImages"
-CATEGORIES = ["Cat", "Dog"]
+filepath = "E:/PetImages"
+classes = ["Cat", "Dog"]
 
 IMG_SIZE = 50
 
@@ -20,9 +20,9 @@ training_data = []
 
 
 def create_training_data():
-    for category in CATEGORIES:  
-
-        path = os.path.join(DATADIR, category)  
+    for category in classes:
+        
+        path = os.path.join(filepath, category)  
         
         class_num = CATEGORIES.index(category)
 
@@ -54,12 +54,12 @@ y = np.array(y)
 
 X = X/255.0
 
-dense_layers = [0, 1, 2]
-layer_sizes = [32, 64, 128]
-conv_layers = [1, 2, 3]
+dense_layers = [0, 1, 2, 3, 4]
+layer_sizes = [32, 64, 128,240]
+conv_layers = [1, 2, 3, 4, 5]
 
 for dense_layer in dense_layers:
-    for layer_size in layer_sizes:
+    for layer_size in layer_sizes:             #optimizing process
         for conv_layer in conv_layers:
                             
             model = Sequential()
