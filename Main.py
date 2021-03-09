@@ -24,7 +24,7 @@ def create_training_data():
         
         path = os.path.join(filepath, category)  
         
-        class_num = CATEGORIES.index(category)
+        class_num = classes.index(category)
 
         for img in tqdm(os.listdir(path)):
 
