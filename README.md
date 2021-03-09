@@ -1,1 +1,0 @@
-# Simple-DeepLearning-algorithm-for-differentiating-Cats-and-Dogs-
